@@ -1,0 +1,45 @@
+
+.header-box {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 10px 40px;
+    border-bottom: 2px solid black; 
+    font-family: 'GT Flexa', sans-serif; 
+}
+
+.header-box h1 {
+    margin: 0;
+    font-weight: bold;
+}
+
+.header-box a {
+    text-decoration: none; 
+    color: inherit;
+}
+
+.button-box {
+    display: flex;
+}
+
+.button-box button {
+    border: 2px solid #000;
+    background: #fdf8e6;
+    color: #000;
+    font-size: 15px;
+    font-weight: 400;
+    width: 93px; 
+    height: 50px;
+    flex-shrink: 0;
+    transition: background 0.3s, color 0.3s;
+    font-family: 'GT Flexa', sans-serif; 
+}
+
+.button-box button:nth-child(2) {
+    background: #007D66;
+    color: #F2FF20;
+}
+
+.button-box button:hover {
+    box-shadow: 0 0 10px #d3ec6e; 
+}

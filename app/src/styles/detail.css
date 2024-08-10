@@ -1,0 +1,268 @@
+.detailmovie-box {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 50px;
+    padding: 40px 70px 70px 0px;
+    position: relative;
+}
+
+.detailmovie-box2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    padding-left: 70px;
+}
+
+.top-item {
+    display: flex;
+    gap: 23px;
+}
+
+.duration-price {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.video-box,
+.duration-box,
+.price-box,
+.genre-box,  
+.description-box {
+    transition: transform 0.3s ease; /* Add transition for smooth animation */
+}
+
+.video-box:hover,
+.duration-box:hover,
+.price-box:hover,
+.genre-box:hover,
+.description-box:hover {
+    transform: scale(1.05); 
+}
+
+.video-box {
+    border: 1px solid #000;
+    background: #FB9B8B;
+    width: 348px;
+    height: 192px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.duration-box, .price-box {
+    width: 161px;
+    height: 88px;
+    border: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.duration-box {
+    background: #A9DCEF;
+}
+
+.price-box {
+    background: #C9C0F5;
+}
+
+.genre-box {
+    width: 330px;
+    height: 88px;
+    border: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: #F5FE65;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.description-box {
+    margin-top: 20px;
+    width: 702px;
+    height: 176px;
+    border: 1px solid #000;
+    background: #C3FB8B;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: justify;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.button-detail {
+    width: 161px;
+    height: 60px;
+    margin: 20px auto 0;
+    padding: 10px;
+    border: 1px solid #000;
+    background: #faf68d;
+    color: rgb(10, 10, 0);
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'GT Flexa', sans-serif;
+    box-sizing: border-box;
+}
+
+.button-back {
+    width: 101px;
+    height: 40px;
+    padding: 10px 20px;
+    border: 1px solid #000;
+    background: #faf68d;
+    color: rgb(10, 10, 0);
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'GT Flexa', sans-serif;
+    box-sizing: border-box;
+    margin-right: 1200px; 
+}
+
+.detail-button-box {
+    display: flex;
+    justify-content: space-between;
+}
+
+.review-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 8px 0 30px;
+}
+
+.review-box h1 {
+    font-weight: bold;
+    text-align: center;
+}
+
+.comment-box {
+    width: 1048px;
+    height: 80px;
+    border: 1px solid #000;
+    background: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: justify;
+    font-size: 14px;
+    margin: 8px auto 0;
+    transition: transform 0.3s ease;
+}
+
+.comment-box:hover {
+    transform: scale(1.03); 
+}
+
+
+@media (max-width: 768px) {
+    .detailmovie-box {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        gap: 30px;
+    }
+
+    .detailmovie-box2 {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .video-box,
+    .duration-box,
+    .price-box,
+    .genre-box,
+    .description-box {
+        width: 100%;
+    }
+
+    .top-item {
+        flex-direction: column;
+    }
+
+    .duration-price{
+        flex-direction: column;
+        gap:20px
+    }
+
+    .detail-button-box {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .comment-box {
+        width: 100%;
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .review-box {
+        padding: 20px 0;
+    }
+
+    .button-back{
+        margin-right: 400px; 
+    }
+}
+
+@media (max-width: 480px) {
+    .detailmovie-box {
+        padding: 10px;
+        gap: 20px;
+    }
+
+    .detailmovie-box2 {
+        padding: 20px;
+    }
+
+    .button-detail,
+    .button-back {
+        width: 100%;
+    }
+
+    .top-item {
+        gap: 15px;
+    }
+
+    .duration-price {
+        gap: 8px;
+    }
+
+    .comment-box {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .description-box {
+        padding: 15px;
+    }
+}
