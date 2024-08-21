@@ -1,11 +1,13 @@
 "use client";
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import '../../styles/login.css';
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault(); 
@@ -25,6 +27,9 @@ export default function Login() {
 
       if (response.ok) {
         console.log('Login successful', result);
+        localStorage.setItem('token', result.data.token);
+        router.push('/');
+        setTimeout(() => window.location.reload(), 800);
       } else {
         alert(result.message || 'Login failed');
       }

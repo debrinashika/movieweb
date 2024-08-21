@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import Moviecard from '../components/Moviecard';
-import Navigate from '../assets/navigate.svg';
-import Navigate2 from '../assets/navigate-right.svg';
-import SearchLogo from '../assets/search.svg';
+import Moviecard from '../../components/Moviecard';
+import Navigate from '../../assets/navigate.svg';
+import Navigate2 from '../../assets/navigate-right.svg';
+import SearchLogo from '../../assets/search.svg';
 import Image from 'next/image';
-import '../styles/page.css';
+import '../../styles/page.css';
 
 type Movie = {
   id: string;  
@@ -28,19 +28,34 @@ export default function Home() {
   const [loading, setLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/api/films')
-      .then(response => response.json())
-      .then(responseData => {
-        setData(responseData.data || []);  // Ensure we always set an array
-        setLoading(false);
-      })
-      .catch(error => {
+    const token = localStorage.getItem('token');
+    setToken(token)
+    
+    const fetchPurchasedMovies = async () => {
+      try {
+       
+        const purchasedResponse = await fetch('/api/users/purchased', {
+          method: 'GET',
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        const responseData = await purchasedResponse.json();
+        setData(responseData || []);  
+      } catch (error) {
         console.error('Error fetching data:', error);
+        setData([]);
+      } finally {
         setLoading(false);
-      });
-  }, []);
+      }
+    };
+
+    if (token) {
+      fetchPurchasedMovies();
+    } 
+  }, [token]);
 
   const handleNext = () => {
     setCurrentPage(prevPage => Math.min(prevPage + 1, Math.ceil(filteredData.length / ITEMS_PER_PAGE) - 1));
@@ -91,7 +106,7 @@ export default function Home() {
   return (
     <div className='home-content'>
       <div className='title-movie'>
-        <h1>MOVIE LIST</h1>
+        <h1>PURCHASED FILMS</h1>
         <div className="search-container">
           <div className="search-bar">
             <input

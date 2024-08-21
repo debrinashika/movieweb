@@ -35,11 +35,71 @@
     font-family: 'GT Flexa', sans-serif; 
 }
 
-.button-box button:nth-child(2) {
+
+.button-box button:hover {
     background: #007D66;
     color: #F2FF20;
 }
 
-.button-box button:hover {
-    box-shadow: 0 0 10px #d3ec6e; 
+.profile-sec {
+    position: relative; 
+    display: flex;
+    align-items: center; 
+    gap: 10px; 
+}
+
+.username-balance {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; 
+}
+
+.username {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.balance {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.profile-popup {
+    position: absolute;
+    top: 100%;
+    right: 0; 
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    display: none;
+    width: 150px;
+    border-radius: 10px;
+}
+
+.profile-sec .profile-popup.show {
+    display: block;
+}
+
+.profile-popup button {
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.profile-popup button:hover {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+}
+
+.profile-icon-navbar {
+    cursor: pointer;
+}
+
+.popup-option {
+    font-family: 'GT Flexa', sans-serif; 
+    color: black;
 }

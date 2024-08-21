@@ -1,17 +1,20 @@
 "use client";
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import '../../styles/login.css';
 
 export default function Signup() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const [confirmpassword, setconfirmPassword] = useState('');
+  const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault(); 
     
-    if (!username || !password) {
+    if (!username || !password || !email) {
       alert('Please fill in all fields');
       return;
     }
@@ -22,17 +25,18 @@ export default function Signup() {
     }
 
     try {
-      const response = await fetch('/api/login', {
+      const response = await fetch('/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password, email}),
       });
       const result = await response.json();
 
       if (response.ok) {
-        console.log('Login successful', result);
+        console.log('Signup successful', result);
+        router.push('/login');
       } else {
-        alert(result.message || 'Login failed');
+        alert(result.message || 'Signup failed');
       }
     } catch (error) {
       alert('An error occurred. Please try again.');
@@ -44,6 +48,15 @@ export default function Signup() {
       <div className='brown-box'>
         <h1 className='title-text-signup'>SIGN UP HERE!</h1>
         <form onSubmit={handleSubmit} className='inputs'>
+          <label htmlFor='email' className='input-label'>EMAIL</label>
+          <input
+            id='email'
+            type='text'
+            className='text-input'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
           <label htmlFor='username' className='input-label'>USERNAME</label>
           <input
             id='username'
