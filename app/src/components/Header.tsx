@@ -13,6 +13,7 @@ export default function Header() {
     const router = useRouter();
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const popupRef = useRef<HTMLDivElement | null>(null);
+    const POLLING_INTERVAL = 5000; // Polling interval in milliseconds (5 seconds)
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -37,12 +38,12 @@ export default function Header() {
                 const result = await response.json();
                 console.log('Fetched user data:', result.data);
                 if (result.status === 'success') {
-                    const responseuser = await fetch('/api/users/', {
+                    const responseUser = await fetch('/api/users/', {
                         method: 'GET',
                         headers: { 'Authorization': `Bearer ${token}` }
                     });
-                    const result2 = await responseuser.json();
-                    setUser(result2)
+                    const result2 = await responseUser.json();
+                    setUser(result2);
                 } else {
                     setUser(null);
                 }
@@ -52,7 +53,15 @@ export default function Header() {
             }
         };
 
-        fetchUserData();
+        fetchUserData(); 
+
+        const intervalId = setInterval(() => {
+            fetchUserData(); 
+        }, POLLING_INTERVAL);
+
+        return () => {
+            clearInterval(intervalId); 
+        };
     }, []);
 
     const togglePopup = () => {

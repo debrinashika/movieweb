@@ -1,7 +1,7 @@
 
 export class Bookmark {
   constructor(
-    public id: string,
+    public id: number,
     public userId: string,
     public filmId: string,
   ) {}

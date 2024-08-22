@@ -33,7 +33,6 @@ export async function POST(request: NextRequest){
 }
 
 export async function GET(request: NextRequest){
-  try {
     const url = new URL(request.url);        
     const pathname = url.pathname;           
     const segments = pathname.split('/');    
@@ -55,10 +54,6 @@ export async function GET(request: NextRequest){
     }
 
     return getBookmarkId(user, filmId);
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
 }
 
 export async function DELETE(request: NextRequest){

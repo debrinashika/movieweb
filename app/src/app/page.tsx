@@ -33,7 +33,7 @@ export default function Home() {
     fetch('/api/films')
       .then(response => response.json())
       .then(responseData => {
-        setData(responseData.data || []);  // Ensure we always set an array
+        setData(responseData.data || []);  
         setLoading(false);
       })
       .catch(error => {

@@ -28,23 +28,19 @@ export default function Detail({ params }: { params: { id: string } }) {
   const [comment, setComment] = useState('');
   const router = useRouter();
   const [averageRating, setAverageRating] = useState<number | null>(null);
+  const [hasPurchased, setHasPurchased] = useState(false);
   const [reviews, setReviews] = useState<Review[]>([]);
   
   useEffect(() => {
     async function fetchMovie() {
       try {
 
-        const response = await fetch(`http://localhost:3000/api/films/${params.id}`);
+        const response = await fetch(`/api/films/${params.id}`);
         if (response.ok) {
           const result = await response.json();
           setMovie(result.data || null);
  
-          const reviewsResponse = await fetch(`/api/films/${params.id}/reviews`, {
-            headers: {
-              'Authorization': `Bearer ${localStorage.getItem('token')}`,
-              'Content-Type': 'application/json',
-            },
-          });
+          const reviewsResponse = await fetch(`/api/films/${params.id}/reviews` );
           if (reviewsResponse.ok) {
             const reviewsData = await reviewsResponse.json();
             setReviews(reviewsData.data || []);
@@ -71,6 +67,24 @@ export default function Detail({ params }: { params: { id: string } }) {
             console.error('Failed to fetch bookmark data:', bookmarkResponse.statusText);
             setIsBookmarked(false); 
           }
+          
+          const purchaseResponse = await fetch(`/api/films/${params.id}`, {
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('token')}`,
+              'Content-Type': 'application/json',
+            },
+          });
+          if (purchaseResponse.ok) {
+            const purchaseData = await purchaseResponse.json();
+            if (purchaseData.id) {
+              setHasPurchased(true);
+            } else {
+              setHasPurchased(false);
+            }
+          } else {
+            setHasPurchased(false);
+          }
+
         } else {
           console.error('Failed to fetch movie:', response.statusText);
         }
@@ -85,7 +99,7 @@ export default function Detail({ params }: { params: { id: string } }) {
   
   const toggleBookmark = async (id: string) => {
     try {
-      const url = `http://localhost:3000/api/films/${id}/bookmark`;
+      const url = `/api/films/${id}/bookmark`;
       const method = isBookmarked ? 'DELETE' : 'POST';
 
       const response = await fetch(url, {
@@ -111,7 +125,7 @@ export default function Detail({ params }: { params: { id: string } }) {
 
   const purchaseMovie = async (id: string) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/films/${id}`, {
+      const response = await fetch(`/api/films/${id}`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -137,7 +151,7 @@ export default function Detail({ params }: { params: { id: string } }) {
 
   const handleSubmitReview = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/films/${params.id}/reviews`, {
+      const response = await fetch(`/api/films/${params.id}/reviews`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -175,11 +189,15 @@ export default function Detail({ params }: { params: { id: string } }) {
         <div className='detail-box'>
           <div className='top-item'>
             <div className='video-box'>
-              {movie.video_url && (
-                <video controls width="100%" height="auto">
-                  <source src={movie.video_url} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+            {hasPurchased ? (
+                movie.video_url && (
+                  <video controls width="100%" height="auto">
+                    <source src={movie.video_url} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                )
+              ) : (
+                <p>Please purchase the movie to watch the video.</p>
               )}
             </div>
             <div className='more-box'>

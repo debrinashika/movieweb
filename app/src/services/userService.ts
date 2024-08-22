@@ -19,6 +19,10 @@ export class UserService {
       throw new Error('All fields are required.');
     }
 
+    if (!userData.validateEmail() || !userData.validateUsername() || !userData.validatePassword()) {
+      throw new Error('Invalid input data.');
+    }
+
     const hashedPassword = await User.hashPassword(userData.password);
     const user = new User(
       userData.id,
@@ -26,10 +30,6 @@ export class UserService {
       userData.email,
       hashedPassword
     );
-
-    if (!user.validateEmail() || !user.validateUsername() || !user.validatePassword()) {
-      throw new Error('Invalid input data.');
-    }
 
     const isTaken = await this.userRepository.isEmailOrUsernameTaken(userData.email, userData.username);
     if (isTaken) {
