@@ -80,13 +80,9 @@ To run the application using Docker, follow these steps:
    ```bash
    git clone https://github.com/debrinashika/movieweb
 
-2. **Create Docker Images**:
+2. **Create Docker Images and Start the Containers**:
    ```bash
    docker-compose up --build
-
-3. **Start the Containers**:
-   ```bash
-   docker-compose up
 
 ## Website Link
 https://movieweb-tan.vercel.app/
