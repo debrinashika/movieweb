@@ -1,6 +1,6 @@
-# Film Management Full-Stack Application
+# Film Management Application
 
-## Developer Information
+## Author
 - **Name**: Debrina Veisha Rashika W
 - **NIM**: 13522025
 
@@ -53,7 +53,7 @@ Welcome to the Film Management Application! This project integrates a comprehens
 - **Responsive Design**: The application is designed to be fully responsive, ensuring a smooth experience across various devices and screen sizes.
 
 ## Admin API Endpoint
-- **Base URL**: [Admin API Endpoint](https://movieweb-tan.vercel.app/api/admin)
+- **Base URL**: https://movieweb-tan.vercel.app/api/admin
 
 ### Admin Credentials
 - **Username**: `admin`
@@ -88,5 +88,5 @@ To run the application using Docker, follow these steps:
    ```bash
    docker-compose up
 
-### Website Link
+## Website Link
 https://movieweb-tan.vercel.app/
